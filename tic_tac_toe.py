@@ -6,24 +6,16 @@ from use_import import _f_win_spieler, _f_win_computer, _f_show_tt, _f_draw, _f_
     _f_convert_computer, _f_stop_game, _f_correct,  _f_num_ttt
 import random
 
-
 falsch = "Die Antwort war nicht korrekt, versuche es nocheinmal.\n"
 belegt = "Dieses Feld ist schon belegt, wähle ein anderes.\n"
 falsche_eingabe = "Dises Feld steht nicht zur Verfügung, wähle ein anderes.\n"
 antwort_ja = ("Ja","ja","JA")
 antwort_nein = ("Nein", "nein", "NEIN")
 
-ttt = [
-    ["(1)", "(2)", "(3)"],
-    ["(4)", "(5)", "(6)"],
-    ["(7)", "(8)", "(9)"]
-]
-
 win_spieler = False
 win_computer = False
 draw = False
 stop_game = False
-spieler_felder = []
 
 #---------
 #TicTacToe
@@ -43,12 +35,23 @@ while win_spieler == False and stop_game == False:
     else:
         eingabe_computer = "x"
 
+    ttt = [
+        ["(1)", "(2)", "(3)"],
+        ["(4)", "(5)", "(6)"],
+        ["(7)", "(8)", "(9)"]
+    ]
+
     ttt_show = "\n1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9"
 
     print(f"Bestimme das Feld deines Steins, indem du eine Zahl zwischen 1-9 wählst. "
           "Die Aufteilung ist wie folgt:",
           ttt_show)
 
+    spieler_felder = []
+
+    win_computer = False
+    win_spieler = False
+    draw = False
     #-------------------------------------------------------------------------------------------------------------------
     #Endlosschleife
 

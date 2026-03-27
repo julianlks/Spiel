@@ -1,3 +1,6 @@
+from tic_tac_toe import computer_zeile
+import random
+
 richtig = "Glückwunsch, Du hast die Frage korrekt beantwortet.\n"
 falsch = "Die Antwort war leider nicht korrekt. Bitte versuche es nochmal.\n"
 belegt = "Dieses Feld ist schon belegt, wähle ein anderes.\n"
@@ -131,7 +134,7 @@ def _f_stop_game(draw, win_computer, win_spieler,ttt):
         print(_f_show_tt(ttt),"\nSpielergebnis: Unentschieden.")
         stop = _f_correct(input("Wilst du nochmal spielen? Schreibe Ja oder Nein."))
         while stop not in ["ja", "nein"]:
-            print(falsche_eingabe)
+            print(f"Die Eingabe <{stop}> konnte nicht vearbeitet werden. Schreibe Ja oder Nein.")
             stop = _f_correct(input("Wilst du nochmal spielen? Schreibe Ja oder Nein."))
         if stop == antwort_nein:
             print("Danke für deine Teilnahme, uns bis zum nächsten mal!")
@@ -140,7 +143,7 @@ def _f_stop_game(draw, win_computer, win_spieler,ttt):
         print(_f_show_tt(ttt),"\nSpielergebnis: Der Computer hat gewonnen.")
         stop = _f_correct(input("Wilst du nochmal spielen? Schreibe Ja oder Nein"))
         while stop not in ["ja", "nein"]:
-            print(falsche_eingabe)
+            print(f"Die Eingabe <{stop}> konnte nicht vearbeitet werden. Schreibe Ja oder Nein.")
             stop = _f_correct(input("Wilst du nochmal spielen? Schreibe Ja oder Nein."))
         if stop == antwort_nein:
             print("Danke für deine Teilnahme, uns bis zum nächsten mal!")
@@ -179,7 +182,7 @@ def _f_num_frage_mod(frage, lösung, spiel):
             int(eingabe_frage)
         except ValueError:
             frage_type = type(frage)
-            print(f"Der eingegebende ist nicht korrekt: {frage_type}. Wähle eine Zahl.\n")
+            print(f"Der eingegebende Datentyp ist nicht korrekt: {frage_type}. Wähle eine Zahl.\n")
             continue
 
         if int(eingabe_frage) == lösung:
@@ -206,6 +209,35 @@ def _f_num_ttt():
             continue
 
     return spieler_feld
+
+def _f_(ttt, eingabe_spieler, eingabe_computer):
+
+    for row in ttt:
+
+        if row == [eingabe_spieler, eingabe_spieler,(i)]:
+            return row
+        elif row == [eingabe_spieler,(i), eingabe_spieler]:
+            return row
+        elif row == [i, eingabe_spieler, eingabe_spieler]:
+            return row
+
+    for col in [0,1,2]:
+
+        if ttt[col][0] == eingabe_spieler and ttt[col][1] == eingabe_spieler and ttt[col][2] == (i):
+            return col
+        elif ttt[col][0] == eingabe_spieler and ttt[col][1] == eingabe_spieler and ttt[col][2] == (i):
+            return col
+        if ttt[col][0] == eingabe_spieler and ttt[col][1] == eingabe_spieler and ttt[col][2] == (i):
+
+
+
+    else:
+        computer_feld = random.randint(1, 9)
+
+
+    _f_convert_computer(computer_feld)
+
+    return computer_feld
 
 
 

@@ -8,8 +8,8 @@ from use_import import _f_num_frage_mod
 #1: Einleitung
 #-------------
 
-name = input("Es freut mich, dich in meinem Spiel begrüßen zu dürfen. Wie heißt du?")
-print(f"Hallo {name}!")
+name = input("Es freut mich, dich in meinem Spiel begrüßen zu dürfen. Wie heißt du?\n").strip()
+print(f"\nHallo {name}!")
 
 print("""
 Erklärung des Spiels: \nDieses Spiel besteht aus zwei Teilen, wobei der 1. Teil ein Quizz ist. Du gewinnst nur, 
@@ -21,7 +21,7 @@ sollte die  Eingabe korrekt sein. Wenn du alle drei Frage richtig beantwortet ha
 #2: Quizz
 #---------
 
-frage_quizz = "Um mit dem ersten Teil zu starten, schreibe 1."
+frage_quizz = "Um mit dem ersten Teil zu starten, schreibe 1.\n"
 lösung_quizz = 1
 
 Quizz = "Quizz"
@@ -39,7 +39,7 @@ Tic-Tac-Toe gegen den Computer spielst. Du hast unendlich viele Versuche, gewinn
 du im Tic-Tac-Toe gewinnen. Viel Glück!
 """)
 
-frage_ttt = "Um mit dem zweiten Teil zu starten, schreibe 2."
+frage_ttt = "Um mit dem zweiten Teil zu starten, schreibe 2.\n"
 lösung_ttt = 2
 TicTacToe = "Tic-Tac-Toe"
 

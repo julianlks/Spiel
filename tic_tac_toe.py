@@ -2,8 +2,8 @@
 #Vorbereitung
 #------------
 
-from use_import import _f_win_spieler, _f_win_computer, _f_show_tt, _f_draw, _f_convert_spieler, \
-    _f_convert_computer, _f_stop_game, _f_correct,  _f_num_ttt
+from use_import import _f_win_spieler, _f_win_computer, _f_show_ttt, _f_draw, _f_convert_spieler, \
+    _f_convert_computer, _f_stop_game, _f_correct,  _f_num_ttt, _f_comp_row, _f_comp_col, _f_comp_dia, _f_comp_else
 import random
 
 falsch = "Die Antwort war nicht korrekt, versuche es nocheinmal.\n"
@@ -23,12 +23,12 @@ stop_game = False
 
 while win_spieler == False and stop_game == False:
 
-    eingabe_spieler = _f_correct(input("Entscheide dich zwischen x/o. Schreibe entweder x oder o."))
+    eingabe_spieler = _f_correct(input("Entscheide dich zwischen x/o. Schreibe entweder x oder o.\n"))
     lösung_eingabe = ["x","o"]
 
     while eingabe_spieler not in lösung_eingabe:
-        print(falsch)
-        eingabe_spieler = _f_correct(input("Entscheide dich zwischen x/o. Schreibe entweder x oder o."))
+        print(f"Die Eingabe <{eingabe_spieler}> konnte nicht verarbeitet werden. Schreibe entweder x oder o.\n")
+        eingabe_spieler = _f_correct(input("Entscheide dich zwischen x/o. Schreibe entweder x oder o.\n"))
 
     if eingabe_spieler == "x":
         eingabe_computer = "o"
@@ -36,18 +36,23 @@ while win_spieler == False and stop_game == False:
         eingabe_computer = "x"
 
     ttt = [
-        ["(1)", "(2)", "(3)"],
-        ["(4)", "(5)", "(6)"],
-        ["(7)", "(8)", "(9)"]
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
     ]
 
     ttt_show = "\n1 | 2 | 3\n4 | 5 | 6\n7 | 8 | 9"
 
-    print(f"Bestimme das Feld deines Steins, indem du eine Zahl zwischen 1-9 wählst. "
+    print(f"\nBestimme das Feld deines Steines, indem du eine Zahl zwischen 1-9 wählst. "
           "Die Aufteilung ist wie folgt:",
           ttt_show)
 
     spieler_felder = []
+    computer_felder = []
+    spieler_zeile_list = []
+    spieler_spalte_list = []
+    computer_zeile_list = []
+    computer_spalte_list = []
 
     win_computer = False
     win_spieler = False
@@ -73,6 +78,8 @@ while win_spieler == False and stop_game == False:
                 spieler_feld = _f_num_ttt()
             spieler_zeile, spieler_spalte = _f_convert_spieler(spieler_feld)
         spieler_felder.append(spieler_feld)
+        spieler_zeile_list.append(spieler_zeile)
+        spieler_spalte_list.append(spieler_spalte)
 
         ttt[spieler_zeile][spieler_spalte] = eingabe_spieler
 
@@ -87,15 +94,30 @@ while win_spieler == False and stop_game == False:
         #---------------------------------------------------------------------------------------------------------------
 
         #Computer
-        computer_feld = random.randint(1, 9)
-        computer_zeile, computer_spalte = _f_convert_computer(computer_feld)
+        while True:
 
-        while ttt[computer_zeile][computer_spalte] in ["x", "o"]:
-            computer_feld = random.randint(1, 9)
-            computer_zeile, computer_spalte = _f_convert_computer(computer_feld)
+            computer_zeile, computer_spalte = _f_comp_row(ttt, eingabe_spieler)
+            if (computer_zeile and computer_spalte)!= None:
+                break
 
+            computer_zeile, computer_spalte = _f_comp_col(ttt, eingabe_spieler)
+            if (computer_zeile and computer_spalte)!= None:
+                break
+
+            computer_zeile, computer_spalte = _f_comp_dia(ttt, eingabe_spieler)
+            if (computer_zeile and computer_spalte)!= None:
+                break
+            
+
+            computer_zeile, computer_spalte = _f_comp_else(ttt, eingabe_spieler)
+            if (computer_zeile and computer_spalte)!= None:
+                break
+
+        computer_zeile_list.append(computer_zeile)
+        computer_spalte_list.append(computer_spalte)
         ttt[computer_zeile][computer_spalte] = eingabe_computer
-        _f_show_tt(ttt)
+        _f_show_ttt(spieler_zeile_list, spieler_spalte_list, eingabe_spieler, \
+                    computer_zeile_list, computer_spalte_list, eingabe_computer)
 
         #Ergebnis prüfen
         win_computer = _f_win_computer(ttt, eingabe_computer)

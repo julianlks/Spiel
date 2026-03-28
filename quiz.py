@@ -1,6 +1,6 @@
+#----
+#Quiz
 #-----
-#Quizz
-#------
 
 from use_import import _f_num_frage, _f_correct
 
@@ -44,4 +44,4 @@ lösung_32 = ["hamburg", "berlin", "bremen"]
 
 while _f_correct(frage_32) not in lösung_32:
     print(falsch)
-    frage_32 = input("Frage 3.2: \nNenne einen Stadtstaat. FÜr eine richtige Eingabe wird nur ein Stadtstaat benötigt.\n")
+    frage_32 = input("Frage 3.2: \nNenne einen Stadtstaat. Für die richtige Eingabe wird nur ein Stadtstaat benötigt.\n")
